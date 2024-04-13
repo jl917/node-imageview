@@ -1,13 +1,24 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface InterfaceImages {
-  original: string;
-  s400x400: string;
+  p: string;
+  format: string;
+  progressive: string;
+  width: string;
+  height: string;
+  quality: string;
+  crop: string;
+  value?: string
 }
 
 const imagesSchema = new Schema<InterfaceImages>({
-  original: { type: String },
-  s400x400: { type: String },
+  p: { type: String },
+  format: { type: String },
+  progressive: { type: String },
+  width: { type: String },
+  height: { type: String },
+  quality: { type: String },
+  crop: { type: String },
 });
 
 export const Images = mongoose.model<InterfaceImages>("image", imagesSchema);

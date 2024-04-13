@@ -1,5 +1,9 @@
 import { Images, InterfaceImages } from "./model";
 
 export const addImages = (data: InterfaceImages) => {
-  Images.collection.insertOne(data).then(() => console.log('wow'));
+  return Images.collection.insertOne(data);
+};
+
+export const findImages = (data: InterfaceImages) => {
+  return Images.collection.findOne(data);
 };
