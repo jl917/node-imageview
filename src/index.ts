@@ -12,7 +12,7 @@ for (const router of Object.values(routes)) {
   app.use("/", router.default);
 }
 
-app.use(express.static("./src/public"));
+app.use(express.static("./public"));
 app.use("/upload", express.static("./upload"));
 
 app.listen(port, () => {
