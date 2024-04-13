@@ -52,4 +52,7 @@ http://localhost:5000/image?p=upload/20240413/97a61d405b/original.png
   - width: number
   - height: number
   - quality(80): 1-100
-  - crop(5): 1-9
+
+
+### 기타
+- 추가적인 예외 처리 필요(width, height 최대값 지정 quality값 범위 등등)
