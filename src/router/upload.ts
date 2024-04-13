@@ -13,9 +13,10 @@ const router = Router();
 router.post("/uploadImages", upload.single('file'), async (req: Request, res: Response) => {
   const filename = getFilename();
   const info = await minify(req.file?.buffer, filename);
-  outputFileSync(path.resolve(`./upload/${filename}/original.${getFileExtension(req.file?.originalname)}`), req.file?.buffer || '')
+  const origin = `./upload/${filename}/original.${getFileExtension(req.file?.originalname)}`
+  outputFileSync(path.resolve(origin), req.file?.buffer || '')
 
-  res.json(info);
+  res.json({ ...info, origin });
 });
 
 export default router;
