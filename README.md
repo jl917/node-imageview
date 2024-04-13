@@ -47,7 +47,7 @@ http://localhost:5000/image?p=upload/20240413/97a61d405b/original.png
 - url: /image
 - params:
   - p(imagePath): string;
-  - format(jpeg): jpeg | png
+  - format(jpeg): jpeg | png | jpg
   - progressive(true): boolean
   - width: number
   - height: number

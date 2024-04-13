@@ -7,7 +7,6 @@ export interface InterfaceImages {
   width: string;
   height: string;
   quality: string;
-  crop: string;
   value?: string
 }
 
@@ -18,7 +17,6 @@ const imagesSchema = new Schema<InterfaceImages>({
   width: { type: String },
   height: { type: String },
   quality: { type: String },
-  crop: { type: String },
 });
 
 export const Images = mongoose.model<InterfaceImages>("image", imagesSchema);

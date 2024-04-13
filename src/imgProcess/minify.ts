@@ -1,5 +1,5 @@
 import { outputFileSync } from "fs-extra";
-import shart from "sharp";
+import sharp from "sharp";
 import path from "path";
 
 export interface IMinifyInfo {
@@ -7,14 +7,14 @@ export interface IMinifyInfo {
 	resize400: string;
 }
 
-const DEFAULT_OPTION_JPEG: shart.JpegOptions = {
+const DEFAULT_OPTION_JPEG: sharp.JpegOptions = {
   mozjpeg: true,
   progressive: true,
   quality: 80,
   optimiseScans: true,
 };
 
-const DEFAULT_OPTION_PNG: shart.PngOptions = {
+const DEFAULT_OPTION_PNG: sharp.PngOptions = {
   progressive: true,
   quality: 80,
 };
@@ -38,11 +38,11 @@ export const minify = async (buffer: Buffer | undefined, filename: string): Prom
 };
 
 const processDetail = async (buffer: Buffer | undefined): Promise<Buffer> => {
-  return shart(buffer).jpeg(DEFAULT_OPTION_JPEG).toBuffer();
+  return sharp(buffer).jpeg(DEFAULT_OPTION_JPEG).toBuffer();
 };
 
 const processResize400 = async (
   buffer: Buffer | undefined
 ): Promise<Buffer> => {
-  return shart(buffer).resize({ width: 400, height: 400 }).toBuffer();
+  return sharp(buffer).resize({ width: 400, height: 400 }).toBuffer();
 };

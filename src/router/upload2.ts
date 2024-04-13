@@ -17,12 +17,11 @@ const router = Router();
 router.get("/image", async (req: Request, res: Response) => {
   const query = {
     p: req.query.p || "",
-    format: req.query.format || "",
-    progressive: req.query.progressive || "",
+    format: req.query.format || "jpeg",
+    progressive: req.query.progressive || "true",
     width: req.query.width || "",
     height: req.query.height || "",
-    quality: req.query.quality || "",
-    crop: req.query.crop || "",
+    quality: req.query.quality || "80",
   } as InterfaceImages;
 
   let imgPath: any = await findImages(query);
@@ -38,7 +37,6 @@ router.get("/image", async (req: Request, res: Response) => {
     }
 
     const { headers, data }: AxiosResponse<Buffer> = await getImageResponse(imgPath.value || imgPath.p);
-    console.log(headers);
     res.set("Content-Type", headers["content-type"]);
     res.send(Buffer.from(data));
   } catch (error) {
