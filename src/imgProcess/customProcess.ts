@@ -4,18 +4,20 @@ import path from "path";
 import { nanoid } from "@/utils/getFilename";
 import { InterfaceImages } from "@/db/model";
 
-type FormatType = "jpeg" | "png";
+type FormatType = "jpeg" | "png" | "webp" | "avif";
 
 const extensionMap: any = {
-  ".jpg": ".jpg",
-  ".jpeg": ".jpg",
-  ".png": ".png",
+  jpg: "jpg",
+  jpeg: "jpg",
+  png: "png",
+  webp: "webp",
+  avif: "avif",
 };
 
 export const customProcess = async (buffer: Buffer | undefined, query: InterfaceImages): Promise<string> => {
-  const ext = extensionMap[path.extname(query.p)];
+  const ext = extensionMap[query.format] || "jpeg";
 
-  let value = `${path.dirname(query.p)}/${nanoid()}${ext}`;
+  let value = `${path.dirname(query.p)}/${nanoid()}.${ext}`;
   // 변환 저장
   await processImage(buffer, query).then((imageBuffer) => {
     outputFileSync(path.resolve(value), imageBuffer || "");
@@ -47,14 +49,22 @@ const processImage = async (buffer: Buffer | undefined, query: InterfaceImages):
     options = {};
   }
 
+  if (query.format === "webp") {
+    formatType = "webp";
+  }
+
+  if (query.format === "avif") {
+    formatType = "avif";
+  }
+
   options = {
     ...options,
-    progressive: query.progressive === 'true' ? true : false,
+    progressive: query.progressive === "true" ? true : false,
     quality: query.quality ? parseInt(query.quality, 10) || 80 : 80,
   };
 
   return sharp(buffer)
     [formatType](options)
     .resize(...resizeOptions)
-    .toBuffer()
+    .toBuffer();
 };

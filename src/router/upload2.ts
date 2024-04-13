@@ -7,7 +7,7 @@ import { getFilename } from "@/utils/getFilename";
 import { getFileExtension } from "@/utils/getFileExtention";
 import { addImages, findImages } from "@/db/action";
 import { InterfaceImages } from "@/db/model";
-import { customProcess } from "@/imgProcess/customProcess";
+import { customProcess } from "@/imgProcess";
 import { getImageResponse } from "@/utils/getImageResponse";
 
 const upload = multer();
